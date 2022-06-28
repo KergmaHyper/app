@@ -14,7 +14,7 @@
 
     <div class="w3-container w3-center">
         <div class="w3-bar w3-padding-24">
-            <div><button class="w3-btn w3-hover-light-blue w3-round-large"
+            <div><button class="w3-btn w3-blue w3-hover-light-blue w3-round-large"
                     onclick="location.href='./products'">Products</button></div>
             <!-- <%-- <div><button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='./add'">Add user</button></div>
     <div><button class="w3-btn w3-hover-red w3-round-large" onclick="location.href='./list'">List users</button></div>

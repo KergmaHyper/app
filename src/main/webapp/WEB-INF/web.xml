@@ -3,10 +3,16 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
     version="3.0">
-  <display-name>Archetype Created Web Application</display-name>
+  <display-name>App for DB mysql</display-name>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+
+
+  <error-page>
+    <error-code>404</error-code>
+    <location>/views/error404.jsp</location>
+  </error-page>
 
   <servlet>
     <servlet-name>prods</servlet-name>
@@ -17,6 +23,41 @@
     <servlet-name>prods</servlet-name>
     <url-pattern>/products</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>create</servlet-name>
+    <servlet-class>app.servlets.ProductsCreateServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>create</servlet-name>
+    <url-pattern>/create</url-pattern>
+  </servlet-mapping>
+
+
+  <servlet>
+    <servlet-name>edit</servlet-name>
+    <servlet-class>app.servlets.ProductsEditServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>edit</servlet-name>
+    <url-pattern>/edit</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>delete</servlet-name>
+    <servlet-class>app.servlets.ProductsDeleteServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>delete</servlet-name>
+    <url-pattern>/delete</url-pattern>
+  </servlet-mapping>
+
+
+
+
 
 
 </web-app>
