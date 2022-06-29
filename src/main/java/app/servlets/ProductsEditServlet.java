@@ -1,6 +1,7 @@
 package app.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,12 +16,24 @@ public class ProductsEditServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
         Product product = ProductsDB.select(id);
+
         req.setAttribute("product", product);
-        getServletContext().getRequestDispatcher("/views/edit.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/views/edit.jsp").forward(req,
+                resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        String name = req.getParameter("name");
+        int price = Integer.parseInt(req.getParameter("price"));
+        // PrintWriter writer = resp.getWriter();
+        // writer.write(name);
+        Product product = new Product(id, name, price);
+        int result = ProductsDB.update(product);
+        req.setAttribute("intResult", result);
+        getServletContext().getRequestDispatcher("/views/products.jsp").forward(req,
+                resp);
 
     }
 }
