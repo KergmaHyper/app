@@ -73,7 +73,7 @@ public class ProductsDB {
 
     public static int update(Product product) {
 
-        String sql = "UPDATE prods SET name=? price=? WHERE id=? ";
+        String sql = "UPDATE prods SET name=?, price=? WHERE id=? ";
         int result = -1;
         try (Connection connection = getConnectionDB()) {
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -92,4 +92,50 @@ public class ProductsDB {
         }
         return result;
     }
+
+    // !
+    public static int insert(Product product) {
+
+        String sql = "INSERT INTO prods (name, price) VALUES (?, ?) ";
+        int result = -1;
+        try (Connection connection = getConnectionDB()) {
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, product.getName());
+                statement.setInt(2, product.getPrice());
+                result = statement.executeUpdate();
+                System.err.println("Insert record");
+            } catch (Exception e) {
+                System.err.println("Error connect to db:\n" + e.getMessage());
+                System.err.println(e.getStackTrace().toString());
+            }
+        } catch (Exception e) {
+            System.err.println("Error connect to db:\n" + e.getMessage());
+            System.err.println(e.getStackTrace().toString());
+        }
+        return result;
+    }
+
+    // !
+    // ?
+    public static int delete(Product product) {
+
+        String sql = "DELETE FROM prods WHERE id=?";
+        int result = -1;
+        try (Connection connection = getConnectionDB()) {
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, product.getId());
+                result = statement.executeUpdate();
+                System.err.println("Delete record");
+            } catch (Exception e) {
+                System.err.println("Error connect to db:\n" + e.getMessage());
+                System.err.println(e.getStackTrace().toString());
+            }
+        } catch (Exception e) {
+            System.err.println("Error connect to db:\n" + e.getMessage());
+            System.err.println(e.getStackTrace().toString());
+        }
+        return result;
+    }
+
+    // ?
 }

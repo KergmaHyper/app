@@ -27,13 +27,10 @@ public class ProductsEditServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         String name = req.getParameter("name");
         int price = Integer.parseInt(req.getParameter("price"));
-        // PrintWriter writer = resp.getWriter();
-        // writer.write(name);
         Product product = new Product(id, name, price);
         int result = ProductsDB.update(product);
-        req.setAttribute("intResult", result);
-        getServletContext().getRequestDispatcher("/views/products.jsp").forward(req,
-                resp);
+        req.setAttribute("updResult", result);
+        resp.sendRedirect("./products");
 
     }
 }
