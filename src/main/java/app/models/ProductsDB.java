@@ -3,6 +3,7 @@ package app.models;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,7 +26,7 @@ public class ProductsDB {
     public static ArrayList<Product> select() {
         ArrayList<Product> products = new ArrayList<>();
 
-        String sql = "SELECT * FROM prods;";
+        String sql = "SELECT * FROM prods";
 
         try (Connection connection = getConnectionDB()) {
             Statement statement = connection.createStatement();
@@ -42,5 +43,53 @@ public class ProductsDB {
             System.err.println(e.getStackTrace().toString());
         }
         return products;
+    }
+
+    public static Product select(int id) {
+        Product product = null;
+        String sql = "SELECT * FROM prods WHERE id=? ";
+
+        try (Connection connection = getConnectionDB()) {
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, id);
+
+                ResultSet resultSet = statement.executeQuery();
+                if (resultSet.next()) {
+                    int _id = resultSet.getInt(1);
+                    String name = resultSet.getString(2);
+                    int price = resultSet.getInt(3);
+                    product = new Product(_id, name, price);
+                }
+            } catch (Exception e) {
+                System.err.println("Error connect to db:\n" + e.getMessage());
+                System.err.println(e.getStackTrace().toString());
+            }
+        } catch (Exception e) {
+            System.err.println("Error connect to db:\n" + e.getMessage());
+            System.err.println(e.getStackTrace().toString());
+        }
+        return product;
+    }
+
+    public static int update(Product product) {
+
+        String sql = "UPDATE prods SET name=? price=? WHERE id=? ";
+        int result = -1;
+        try (Connection connection = getConnectionDB()) {
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, product.getName());
+                statement.setInt(2, product.getPrice());
+                statement.setInt(3, product.getId());
+                result = statement.executeUpdate();
+                System.err.println("Update record");
+            } catch (Exception e) {
+                System.err.println("Error connect to db:\n" + e.getMessage());
+                System.err.println(e.getStackTrace().toString());
+            }
+        } catch (Exception e) {
+            System.err.println("Error connect to db:\n" + e.getMessage());
+            System.err.println(e.getStackTrace().toString());
+        }
+        return result;
     }
 }

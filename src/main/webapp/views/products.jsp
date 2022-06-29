@@ -12,7 +12,8 @@
                     <!-- <th>ID</th> -->
                     <th>Name</th>
                     <th>Price</th>
-                    <th>Action
+                    <th>
+                        <!-- Action -->
                         <button class="w3-btn w3-blue w3-round-large "
                             onclick="location.href='./create'">create</button>
                     </th>
@@ -24,20 +25,21 @@
                                 <c:out value="${product.id}" />
                             </td> -->
                             <td>
-                                <c:out value="${product.name}" />
+                                <a href="<c:url value='/edit?id=${product.id}' />">
+                                    <c:out value="${product.name}" />
+                                </a>
                             </td>
                             <td>
                                 <c:out value="${product.price}" />
                             </td>
                             <td>
-
-                                <form method="get" action="<c:url value='/edit?id=${product.id}' />"
+                                <!-- <form method="get" action="<c:url value='/edit?id=${product.id}' />"
                                     style="display:inline;">
                                     <input type="hidden" name="id" value="${product.id}" />
                                     <div style="display:inline;">
                                         <button type="submit" class="w3-btn w3-yellow w3-round-large ">edit</button>
                                     </div>
-                                </form>
+                                </form> -->
                                 <form method="POST" action="<c:url value='/delete'/>" style="display:inline;">
                                     <input type="hidden" name="id" value="${product.id}" />
                                     <div style="display:inline;">
