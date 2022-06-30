@@ -2,3 +2,11 @@
 *.class
 ./../*.class
 /.vscode
+target/classes/app/entities/Product.class
+target/classes/app/models/ProductsDB.class
+target/classes/app/servlets/ProductsCreateServlet.class
+target/classes/app/servlets/ProductsDeleteServlet.class
+target/classes/app/servlets/ProductsEditServlet.class
+target/classes/app/servlets/ProductsServlet.class
+target/classes/app/entities/Product.class
+target/classes/app/entities/Product.class
