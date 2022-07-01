@@ -1,0 +1,2 @@
+=== app0206 Config Vars
+CLEARDB_DATABASE_URL: mysql://b171d8d29183ef:35314136@us-cdbr-east-06.cleardb.net/heroku_adf071f674d6573?reconnect=true

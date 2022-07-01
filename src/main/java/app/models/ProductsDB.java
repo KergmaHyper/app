@@ -13,9 +13,13 @@ import app.entities.Product;
 
 public class ProductsDB {
 
-    static String url = "jdbc:mysql://localhost/products?useSSL=true";
-    static String user = "kergma";
-    static String password = "P@ssw0rd";
+    // static String url = "jdbc:mysql://localhost/products?useSSL=true";
+    // static String user = "kergma";
+    // static String password = "P@ssw0rd";
+    static String url = "jdbc:mysql://us-cdbr-east-06.cleardb.net/heroku_adf071f674d6573?reconnect=true?useSSL=true";
+    static String user = "b171d8d29183ef";
+    static String password = "35314136";
+    static String tabeName = "";
 
     public static Connection getConnectionDB() throws SQLException, InstantiationException, IllegalAccessException,
             IllegalArgumentException, InvocationTargetException, SecurityException, ClassNotFoundException {
