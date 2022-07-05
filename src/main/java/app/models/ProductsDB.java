@@ -9,22 +9,27 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import app.entities.DBConnect;
 import app.entities.Product;
 
 public class ProductsDB {
 
-    // static String url = "jdbc:mysql://localhost/products?useSSL=true";
-    // static String user = "kergma";
-    // static String password = "P@ssw0rd";
-    static String url = "jdbc:mysql://us-cdbr-east-06.cleardb.net/heroku_adf071f674d6573?reconnect=true?useSSL=true";
-    static String user = "b171d8d29183ef";
-    static String password = "35314136";
+    static String url = "jdbc:mysql://localhost/products?useSSL=true";
+    static String user = "kergma";
+    static String pass = "P@ssw0rd";
+    // static String url =
+    // "jdbc:mysql://us-cdbr-east-06.cleardb.net/heroku_adf071f674d6573?reconnect=true?useSSL=true";
+    // static String user = "b171d8d29183ef";
+    // static String pass = "35314136";
     static String tabeName = "";
 
     public static Connection getConnectionDB() throws SQLException, InstantiationException, IllegalAccessException,
             IllegalArgumentException, InvocationTargetException, SecurityException, ClassNotFoundException {
         Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructors()[0].newInstance();
-        return DriverManager.getConnection(url, user, password);
+        DBConnect dbConn = DBConnect.getInstance();
+        // System.out.println("url to file :" + dbcInst.url);
+
+        return DriverManager.getConnection(dbConn.url, dbConn.user, dbConn.pass);
     }
 
     public static ArrayList<Product> select() {
@@ -40,11 +45,11 @@ public class ProductsDB {
                 String name = resultSet.getNString(2);
                 int price = resultSet.getInt(3);
                 products.add(new Product(id, name, price));
-                System.err.println("add product");
+                System.err.println("add product :" + name);
+
             }
         } catch (Exception e) {
             System.err.println("Error connect to db:\n" + e.getMessage());
-            System.err.println(e.getStackTrace().toString());
         }
         return products;
     }
@@ -66,11 +71,9 @@ public class ProductsDB {
                 }
             } catch (Exception e) {
                 System.err.println("Error connect to db:\n" + e.getMessage());
-                System.err.println(e.getStackTrace().toString());
             }
         } catch (Exception e) {
             System.err.println("Error connect to db:\n" + e.getMessage());
-            System.err.println(e.getStackTrace().toString());
         }
         return product;
     }
@@ -88,11 +91,9 @@ public class ProductsDB {
                 System.err.println("Update record");
             } catch (Exception e) {
                 System.err.println("Error connect to db:\n" + e.getMessage());
-                System.err.println(e.getStackTrace().toString());
             }
         } catch (Exception e) {
             System.err.println("Error connect to db:\n" + e.getMessage());
-            System.err.println(e.getStackTrace().toString());
         }
         return result;
     }
@@ -110,11 +111,9 @@ public class ProductsDB {
                 System.err.println("Insert record");
             } catch (Exception e) {
                 System.err.println("Error connect to db:\n" + e.getMessage());
-                System.err.println(e.getStackTrace().toString());
             }
         } catch (Exception e) {
             System.err.println("Error connect to db:\n" + e.getMessage());
-            System.err.println(e.getStackTrace().toString());
         }
         return result;
     }
@@ -132,11 +131,9 @@ public class ProductsDB {
                 System.err.println("Delete record");
             } catch (Exception e) {
                 System.err.println("Error connect to db:\n" + e.getMessage());
-                System.err.println(e.getStackTrace().toString());
             }
         } catch (Exception e) {
             System.err.println("Error connect to db:\n" + e.getMessage());
-            System.err.println(e.getStackTrace().toString());
         }
         return result;
     }

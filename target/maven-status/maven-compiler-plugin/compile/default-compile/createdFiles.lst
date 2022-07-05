@@ -1,0 +1,8 @@
+app\servlets\ProductsCreateServlet.class
+app\servlets\ProductsDeleteServlet.class
+app\entities\DBConnect.class
+app\models\ProductsDB.class
+app\entities\Product.class
+app\entities\DBConnect$DBConnectHold.class
+app\servlets\ProductsServlet.class
+app\servlets\ProductsEditServlet.class
